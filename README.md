@@ -1,2 +1,2 @@
 # Tetris
-A JavaFX FXGL 2D Game I made for School
+A JavaFX FXGL 2D Game we made for School
