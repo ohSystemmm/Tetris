@@ -2,6 +2,7 @@ package org.example.tetris;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import javafx.util.Duration;
@@ -11,6 +12,7 @@ public class MainApp extends GameApplication {
 
     private Entity currentTetromino;
     private final Random random = new Random();
+    private static MusicController musicController;
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -22,6 +24,8 @@ public class MainApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        musicController = new MusicController("src/main/resources/assets/music/tetris.mp3");
+        musicController.play();
         FXGL.getGameWorld().addEntityFactory(new TetrominoFactory());
         spawnNewTetromino();
 
