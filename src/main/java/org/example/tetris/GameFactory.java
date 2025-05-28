@@ -27,4 +27,47 @@ public class GameFactory implements EntityFactory {
                 .zIndex(-100)
                 .build();
     }
+
+    @Spawns("center")
+    public Entity spawnCenter(SpawnData data) {
+        return entityBuilder(data)
+                .type(EntityType.CENTER)
+                .collidable()
+                .viewWithBBox(new Circle(data.<Integer>get("radius"), Color.DARKRED))
+                .with(new IrremovableComponent())
+                .zIndex(-99)
+                .build();
+    }
+
+    @Spawns("duke")
+    public Entity spawnDuke(SpawnData data) {
+        return entityBuilder(data)
+                .type(EntityType.DUKE)
+                .viewWithBBox(texture("duke.png", 50, 50))
+                .collidable()
+                .with(new AutoRotationComponent())
+                .with(new PlayerComponent())
+                .build();
+    }
+
+    @Spawns("bullet")
+    public Entity newBullet(SpawnData data) {
+        return entityBuilder(data)
+                .type(EntityType.BULLET)
+                .viewWithBBox(texture("sprite_bullet.png", 22, 11))
+                .collidable()
+                .with(new ProjectileComponent(data.get("direction"), 350), new OffscreenCleanComponent())
+                .build();
+    }
+
+    @Spawns("cloud")
+    public Entity newCloud(SpawnData data) {
+        return entityBuilder(data)
+                .type(EntityType.CLOUD)
+                .viewWithBBox(texture("cloud-network.png", 50, 50))
+                .with((new AutoRotationComponent()).withSmoothing())
+                .with(new CloudComponent())
+                .collidable()
+                .build();
+    }
 }
