@@ -31,13 +31,6 @@ public class PlayerComponent extends Component {
         }
     }
 
-    public void shoot() {
-        spawn("bullet", new SpawnData(
-                getEntity().getPosition().getX() + 20,
-                getEntity().getPosition().getY() - 5)
-                .put("direction", direction));
-    }
-
     public void die() {
         inc("lives", -1);
 

@@ -48,12 +48,6 @@ public class MainGameApp extends GameApplication {
     }
 
     @Override
-    protected void initGameVars(Map<String, Object> vars) {
-        vars.put("score", 0);
-        vars.put("lives", 5);
-    }
-
-    @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(this.gameFactory);
 
