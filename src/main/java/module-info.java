@@ -4,6 +4,7 @@ module org.example.tetris {
 
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires javafx.media;
 
     opens org.example.tetris to javafx.fxml;
     exports org.example.tetris;

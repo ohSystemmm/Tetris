@@ -20,6 +20,7 @@ public class MainGameApp extends GameApplication {
 
     private static int screenWidth;
     private static int screenHeight;
+    private static MusicController musicController;
 
     public static void main(String[] args) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -56,36 +57,16 @@ public class MainGameApp extends GameApplication {
     protected void initGame() {
         getGameWorld().addEntityFactory(this.gameFactory);
 
+        musicController = new MusicController("src/main/resources/assets/music/tetris.mp3");
+        musicController.play();
+
         // Background color
         spawn("background", new SpawnData(0, 0).put("width", getAppWidth())
                 .put("height", getAppHeight()));
-
-        // Circle in the middle of the screen
-        int circleRadius = 80;
-        spawn("center", new SpawnData(
-                (getAppWidth() / 2) - (circleRadius / 2),
-                (getAppHeight() / 2) - (circleRadius / 2))
-                .put("x", (circleRadius / 2))
-                .put("y", (circleRadius / 2))
-                .put("radius", circleRadius));
-
-        // Add the player
-        this.player = spawn("duke", 0, 0);
     }
 
     @Override
     protected void initPhysics() {
-        onCollisionBegin(EntityType.DUKE, EntityType.CENTER, (duke, center) ->
-                this.player.getComponent(PlayerComponent.class).die());
-
-        onCollisionBegin(EntityType.DUKE, EntityType.CLOUD, (enemy, cloud) ->
-                this.player.getComponent(PlayerComponent.class).die());
-
-        onCollisionBegin(EntityType.BULLET, EntityType.CLOUD, (bullet, cloud) -> {
-            inc("score", 1);
-            bullet.removeFromWorld();
-            cloud.removeFromWorld();
-        });
     }
 
     @Override
@@ -115,8 +96,5 @@ public class MainGameApp extends GameApplication {
 
     @Override
     protected void onUpdate(double tpf) {
-        if (getGameWorld().getEntitiesByType(EntityType.CLOUD).size() < 10) {
-            spawn("cloud", getAppWidth() / 2, getAppHeight() / 2);
-        }
     }
 }
