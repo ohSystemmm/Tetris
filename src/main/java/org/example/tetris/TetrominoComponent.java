@@ -1,22 +1,36 @@
 package org.example.tetris;
 
 import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.dsl.FXGL;
 
 public class TetrominoComponent extends Component {
 
+    private static final int MOVE_STEP = 30;
+
     public void moveDown() {
-        entity.translateY(30);
+        if (!checkCollision(0, MOVE_STEP))
+            entity.setPosition(entity.getX(), entity.getY() + MOVE_STEP);
+        else {
+            FXGL.getWorldProperties().increment("score", 10); // Add scoring
+            entity.removeFromWorld();
+        }
     }
 
     public void moveLeft() {
-        entity.translateX(-30);
+        if (!checkCollision(-MOVE_STEP, 0))
+            entity.setPosition(entity.getX() - MOVE_STEP, entity.getY());
     }
 
     public void moveRight() {
-        entity.translateX(30);
+        if (!checkCollision(MOVE_STEP, 0))
+            entity.setPosition(entity.getX() + MOVE_STEP, entity.getY());
     }
 
     public void rotate() {
         entity.rotateBy(90);
+    }
+
+    private boolean checkCollision(int dx, int dy) {
+        return false; // TODO
     }
 }
