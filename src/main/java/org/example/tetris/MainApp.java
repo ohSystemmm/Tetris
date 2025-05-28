@@ -11,6 +11,7 @@ public class MainApp extends GameApplication {
 
     private Entity currentTetromino;
     private final Random random = new Random();
+    private static MusicController musicController;
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -22,6 +23,8 @@ public class MainApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        musicController = new MusicController("src/main/resources/assets/music/tetris.mp3");
+        musicController.play();
         FXGL.getGameWorld().addEntityFactory(new TetrominoFactory());
         spawnNewTetromino();
 
