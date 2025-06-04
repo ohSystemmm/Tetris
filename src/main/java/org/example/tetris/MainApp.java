@@ -50,8 +50,8 @@ public class MainApp extends GameApplication {
 
     @Override
     protected void initInput(){
-        onKey(KeyCode.LEFT, "left2", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft());
+        onKey(KeyCode.LEFT, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft());
         onKey(KeyCode.RIGHT, "right", () ->  this.currentTetromino.getComponent(TetrominoComponent.class).moveRight());
-        onKey(KeyCode.UP, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
+        onKey(KeyCode.UP, "rotate", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
     }
 }
