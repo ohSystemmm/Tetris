@@ -4,13 +4,18 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+
 import java.util.Random;
+
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class MainApp extends GameApplication {
 
     private Entity currentTetromino;
     private final Random random = new Random();
+    private static MusicController musicController;
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -22,6 +27,8 @@ public class MainApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        musicController = new MusicController("src/main/resources/assets/music/tetris.mp3");
+        musicController.play();
         FXGL.getGameWorld().addEntityFactory(new TetrominoFactory());
         spawnNewTetromino();
 
@@ -39,5 +46,12 @@ public class MainApp extends GameApplication {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    protected void initInput(){
+        onKey(KeyCode.LEFT, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft());
+        onKey(KeyCode.RIGHT, "right", () ->  this.currentTetromino.getComponent(TetrominoComponent.class).moveRight());
+        onKey(KeyCode.UP, "rotate", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
     }
 }
