@@ -4,6 +4,7 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.input.Input;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
@@ -33,10 +34,13 @@ public class MainApp extends GameApplication {
         spawnNewTetromino();
 
         FXGL.run(() -> {
-            if (currentTetromino != null)
+            if (currentTetromino != null) {
                 currentTetromino.getComponent(TetrominoComponent.class).moveDown();
-        }, Duration.seconds(0.8));
+            }
+        }, Duration.seconds(1.5));
     }
+
+
 
     private void spawnNewTetromino() {
         TetrominoType type = TetrominoType.values()[random.nextInt(TetrominoType.values().length)];
@@ -48,10 +52,38 @@ public class MainApp extends GameApplication {
         launch(args);
     }
 
+//    @Override
+//    protected void initInput(){
+//        onKey(KeyCode.LEFT, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft() && time.sleep);
+//        onKey(KeyCode.RIGHT, "right", () ->  this.currentTetromino.getComponent(TetrominoComponent.class).moveRight());
+//        onKey(KeyCode.UP, "rotate", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
+//    }
     @Override
-    protected void initInput(){
-        onKey(KeyCode.LEFT, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft());
-        onKey(KeyCode.RIGHT, "right", () ->  this.currentTetromino.getComponent(TetrominoComponent.class).moveRight());
-        onKey(KeyCode.UP, "rotate", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
+    protected void initInput() {
+        FXGL.onKeyDown(KeyCode.LEFT, () -> {
+            if (currentTetromino != null) {
+                currentTetromino.getComponent(TetrominoComponent.class).moveLeft();
+            }
+
+            FXGL.runOnce(() -> {
+            }, Duration.seconds(1.5));
+        });
+        FXGL.onKeyDown(KeyCode.RIGHT, () -> {
+            if (currentTetromino != null) {
+                currentTetromino.getComponent(TetrominoComponent.class).moveRight();
+            }
+
+            FXGL.runOnce(() -> {
+            }, Duration.seconds(1.5));
+        });
+        FXGL.onKeyDown(KeyCode.UP, () -> {
+            if (currentTetromino != null) {
+                currentTetromino.getComponent(TetrominoComponent.class).rotate();
+            }
+
+            FXGL.runOnce(() -> {
+            }, Duration.seconds(1.5));
+        });
+
     }
 }

@@ -20,6 +20,7 @@ public class TetrominoComponent extends Component {
     public void moveLeft() {
         if (!checkCollision(-MOVE_STEP, 0))
             entity.setPosition(entity.getX() - MOVE_STEP, entity.getY());
+
     }
 
     public void moveRight() {
