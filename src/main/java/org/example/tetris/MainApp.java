@@ -2,11 +2,14 @@ package org.example.tetris;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+
 import java.util.Random;
+
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class MainApp extends GameApplication {
 
@@ -43,5 +46,12 @@ public class MainApp extends GameApplication {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    protected void initInput(){
+        onKey(KeyCode.LEFT, "left2", () -> this.currentTetromino.getComponent(TetrominoComponent.class).moveLeft());
+        onKey(KeyCode.RIGHT, "right", () ->  this.currentTetromino.getComponent(TetrominoComponent.class).moveRight());
+        onKey(KeyCode.UP, "left", () -> this.currentTetromino.getComponent(TetrominoComponent.class).rotate());
     }
 }
