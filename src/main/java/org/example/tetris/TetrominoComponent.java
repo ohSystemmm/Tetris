@@ -1,7 +1,8 @@
 package org.example.tetris;
 
-import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.component.Component;
+
 
 public class TetrominoComponent extends Component {
 
