@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Objects;
 
 import javax.swing.JPanel;
 
@@ -12,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int HEIGHT = 720;
     public final int FPS = 60;
     private Thread gameThread;
-    private PlayManager pm;
+    private final PlayManager pm;
     public static Sound music = new Sound();
     public static Sound se = new Sound();
 
@@ -54,10 +55,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-        if (KeyHandler.status == "pause" || pm.GameOver) {
+        if (Objects.equals(KeyHandler.status, "pause") || pm.GameOver) {
             return;
         }
-        if (KeyHandler.status == "continue") {
+        if (Objects.equals(KeyHandler.status, "continue")) {
             pm.update();
         }
     }

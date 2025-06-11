@@ -191,6 +191,29 @@ public class PlayManager {
         y += 50;
         g2.drawString("" + score, x + 20, y);
 
+        // Controls
+        g2.drawRect(75, 50, 200, 210);
+        g2.setFont(new Font("Arial", Font.PLAIN, 30));
+        g2.drawString("Controls: ", 85, 90);
+
+        g2.setFont(new Font("Arial", Font.PLAIN, 25));
+
+        g2.drawString("Pause", 85, 130);
+        g2.drawString("P", 200, 130);
+
+        g2.drawString("Rotate", 85, 155);
+        g2.drawString("\uDB80\uDF11", 200, 155);
+
+        g2.drawString("Down", 85, 180);
+        g2.drawString("\uEAA1, \uEA9A", 200, 180);
+
+        g2.drawString("Left", 85, 205);
+        g2.drawString("\uEA9B", 200, 205);
+
+        g2.drawString("Right", 85, 230);
+        g2.drawString("\uEA9C", 200, 230);
+
+
         if (currentMino != null) {
             currentMino.draw(g2);
         }
