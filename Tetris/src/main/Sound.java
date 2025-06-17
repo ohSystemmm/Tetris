@@ -13,11 +13,11 @@ public class Sound {
     private URL[] url = new URL[10];
 
     public Sound() {
-        url[0] = getClass().getResource("../se/bgm.wav"); // background music
-        url[1] = getClass().getResource("../se/rotation.wav");
-        url[2] = getClass().getResource("../se/delete line.wav");
-        url[3] = getClass().getResource("../se/gameover.wav");
-        url[4] = getClass().getResource("../se/touchfloor.wav");
+        url[0] = getClass().getResource("../sound/bgm.wav"); // background music
+        url[1] = getClass().getResource("../sound/rotation.wav");
+        url[2] = getClass().getResource("../sound/delete line.wav");
+        url[3] = getClass().getResource("../sound/gameover.wav");
+        url[4] = getClass().getResource("../sound/touchfloor.wav");
     }
 
     public void play(int i, boolean music) {
